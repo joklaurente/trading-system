@@ -271,3 +271,78 @@ curl --location --request PUT 'http://localhost:8000/api/stock/1/' \
 ```
 
 
+### Buy Stock
+----
+  Buys a stock.
+
+* **URL**
+
+  `/api/trading/buy`
+
+* **Method:**
+
+  `POST`
+  
+*  **Required Params**
+ 
+   `stock_id=[string]`<br />
+   `quantity=[integer]`<br />
+
+*  **Header**
+ 
+   `Authorization: Token`
+
+* **Success Response:**
+
+  * **Code:** 201 CREATED<br />
+```
+Stock has been bought
+```
+
+* **Sample Call:**
+
+```
+curl --location --request POST 'http://localhost:8000/api/trading/buy' \
+--header 'Authorization: Token 27463b7ca44e32913c476eb5d0ed2cc4cf078da1' \
+--form 'stock_id=AC' \
+--form 'quantity=450'
+```
+
+### Sell Stock
+----
+  Sells a stock.
+
+* **URL**
+
+  `/api/trading/sell`
+
+* **Method:**
+
+  `POST`
+  
+*  **Required Params**
+ 
+   `stock_id=[string]`<br />
+   `quantity=[integer]`<br />
+
+*  **Header**
+ 
+   `Authorization: Token`
+
+* **Success Response:**
+
+  * **Code:** 201 CREATED<br />
+```
+Stock has been sold
+```
+
+* **Sample Call:**
+
+```
+curl --location --request POST 'http://localhost:8000/api/trading/sell' \
+--header 'Authorization: Token 27463b7ca44e32913c476eb5d0ed2cc4cf078da1' \
+--form 'stock_id=AC' \
+--form 'quantity=50'
+```
+
+
