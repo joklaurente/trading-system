@@ -56,9 +56,9 @@ python manage.py loaddata fixtures/stocks.json
 python manage.py runserver
 ```
 ## API Endpoints
-### Show User
+### Create User and Token
 ----
-  Creates a new user and returns a token.
+  Creates a new user and token.
 
 * **URL**
 
@@ -73,6 +73,9 @@ python manage.py runserver
    `username=[string]`<br />
    `password=[string]`
 
+*  **Header**
+ 
+   `Authorization: None`
 
 * **Success Response:**
 
@@ -84,16 +87,6 @@ python manage.py runserver
     "token": "96033009074f716d51ad27480f1c89a4efa612c4"
 }
 ```
-* **Error Response:**
-
-  * **Code:** 400 BAD REQUEST<br />
-```
-{
-    "username": [
-        "A user with that username already exists."
-    ]
-}
-```
 
 * **Sample Call:**
 
@@ -101,4 +94,89 @@ python manage.py runserver
 curl --location --request POST 'http://localhost:8000/api/user/register' \
 --form 'username=user' \
 --form 'password=password'
+```
+
+### Show Stock List
+----
+  Shows the list of stocks.
+
+* **URL**
+
+  /api/stock/list
+
+* **Method:**
+
+  `GET`
+  
+*  **Required Params**
+ 
+   `None`
+
+*  **Header**
+ 
+   `Authorization: Token`
+
+* **Success Response:**
+
+  * **Code:** 200 OK<br />
+```
+[
+    {
+        "oid": "AC",
+        "name": "Ayala Corporation",
+        "price": 733.5
+    },
+    {
+        "oid": "CHIB",
+        "name": "China Banking Corporation",
+        "price": 20.6
+    },
+    {
+        "oid": "FEU",
+        "name": "Far Eastern University, Inc.",
+        "price": 575.0
+    },
+    {
+        "oid": "FLI",
+        "name": "Filinvest Land, Inc.",
+        "price": 0.94
+    },
+    {
+        "oid": "GLO",
+        "name": "Globe Telecom, Inc.",
+        "price": 2030.0
+    },
+    {
+        "oid": "JFC",
+        "name": "Jollibee Foods Corporation",
+        "price": 135.1
+    },
+    {
+        "oid": "MER",
+        "name": "Manila Electric Company",
+        "price": 269.0
+    },
+    {
+        "oid": "SMPH",
+        "name": "SM Prime Holdings, Inc.",
+        "price": 29.0
+    },
+    {
+        "oid": "SLF",
+        "name": "Sun Life Financial, Inc.",
+        "price": 1925.0
+    },
+    {
+        "oid": "WLCON",
+        "name": "Wilcon Depot, Inc.",
+        "price": 16.2
+    }
+]
+```
+
+* **Sample Call:**
+
+```
+curl --location --request GET 'http://localhost:8000/api/stock/list' \
+--header 'Authorization: Token 96033009074f716d51ad27480f1c89a4efa612c4'
 ```
