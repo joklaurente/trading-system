@@ -63,7 +63,7 @@ python manage.py runserver
 
 * **URL**
 
-  /api/user/register
+  `/api/user/register`
 
 * **Method:**
 
@@ -103,7 +103,7 @@ curl --location --request POST 'http://localhost:8000/api/user/register' \
 
 * **URL**
 
-  /api/stock/list
+  `/api/stock/list`
 
 * **Method:**
 
@@ -185,11 +185,11 @@ curl --location --request GET 'http://localhost:8000/api/stock/list' \
 
 ### Create Stock
 ----
-  Create a new stock.
+  Creates a new stock.
 
 * **URL**
 
-  /api/stock/create
+  `/api/stock/create`
 
 * **Method:**
 
@@ -210,7 +210,7 @@ curl --location --request GET 'http://localhost:8000/api/stock/list' \
   * **Code:** 201 CREATED<br />
 ```
 {
-    "oid": "GLOBE",
+    "oid": "GLO",
     "name": "Globe Telecom, Inc.",
     "price": "500.00"
 }
@@ -221,8 +221,53 @@ curl --location --request GET 'http://localhost:8000/api/stock/list' \
 ```
 curl --location --request POST 'http://localhost:8000/api/stock/create' \
 --header 'Authorization: Token 7b5187a2b32631aff0d61b29df4530cc08c741c7' \
---form 'oid=GLOBE' \
+--form 'oid=GLO' \
 --form 'name=Globe Telecom, Inc.' \
 --form 'price=500'
 ```
+
+### Update Stock
+----
+  Updates an existing stock.
+
+* **URL**
+
+  `/api/stock/<int:pk>/`
+
+* **Method:**
+
+  `PUT`<br />
+  `GET`
+  
+*  **Required Params**
+ 
+   `oid=[string]`<br />
+   `name=[string]`<br />
+   `price=[float]`
+
+*  **Header**
+ 
+   `Authorization: Token`
+
+* **Success Response:**
+
+  * **Code:** 200 OK<br />
+```
+{
+    "oid": "GLO",
+    "name": "Globe Telecom, Inc.",
+    "price": "1500.00"
+}
+```
+
+* **Sample Call:**
+
+```
+curl --location --request PUT 'http://localhost:8000/api/stock/1/' \
+--header 'Authorization: Token 47d06b1337e333df00060c50764231b53b15976a' \
+--form 'oid=GLO' \
+--form 'name=Globe Telecom, Inc.' \
+--form 'price=1500'
+```
+
 
