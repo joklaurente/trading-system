@@ -72,10 +72,14 @@ class TradeBuyView(generics.ListCreateAPIView):
                 'request': request
             },
         )
+        data = {}
         if serializer.is_valid():
-            serializer.save()
-            message = 'Stock has been bought'
-            return Response(message, status=status.HTTP_201_CREATED)
+            trade = serializer.save()
+            stock = Stock.objects.get(name=trade.stock)
+            data['transaction'] = 'Buy'
+            data['stock_name'] = stock.name
+            data['quantity'] = request.data['quantity']
+            return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -90,10 +94,14 @@ class TradeSellView(generics.ListCreateAPIView):
                 'request': request
             },
         )
+        data = {}
         if serializer.is_valid():
-            serializer.save()
-            message = 'Stock has been sold'
-            return Response(message, status=status.HTTP_201_CREATED)
+            trade = serializer.save()
+            stock = Stock.objects.get(name=trade.stock)
+            data['transaction'] = 'Sell'
+            data['stock_name'] = stock.name
+            data['quantity'] = request.data['quantity']
+            return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

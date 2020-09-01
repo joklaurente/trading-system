@@ -296,7 +296,11 @@ curl --location --request PUT 'http://localhost:8000/api/stock/1/' \
 
   * **Code:** 201 CREATED<br />
 ```
-Stock has been bought
+{
+    "transaction": "Buy",
+    "stock_name": "Ayala Corporation",
+    "quantity": "450"
+}
 ```
 
 * **Sample Call:**
@@ -333,7 +337,11 @@ curl --location --request POST 'http://localhost:8000/api/trading/buy' \
 
   * **Code:** 201 CREATED<br />
 ```
-Stock has been sold
+{
+    "transaction": "Sell",
+    "stock_name": "Ayala Corporation",
+    "quantity": "50"
+}
 ```
 
 * **Sample Call:**
