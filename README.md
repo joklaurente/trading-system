@@ -346,3 +346,84 @@ curl --location --request POST 'http://localhost:8000/api/trading/sell' \
 ```
 
 
+
+### Show Stocks Invested
+----
+  Shows the stocks invested by a user.
+
+* **URL**
+
+  `/api/trading/list`
+
+* **Method:**
+
+  `GET`
+  
+*  **Required Params**
+ 
+   `None`<br />
+
+*  **Header**
+ 
+   `Authorization: Token`
+
+* **Success Response:**
+
+  * **Code:** 200 OK<br />
+```
+[
+    {
+        "stock__name": "Globe Telecom, Inc.",
+        "quantity": 18
+    },
+    {
+        "stock__name": "Ayala Corporation",
+        "quantity": 400
+    }
+]
+```
+
+* **Sample Call:**
+
+```
+curl --location --request GET 'http://localhost:8000/api/trading/list' \
+--header 'Authorization: Token 27463b7ca44e32913c476eb5d0ed2cc4cf078da1'
+```
+
+### Show Total Value Invested
+----
+  Shows the total value invested in a single stock by a user.
+
+* **URL**
+
+  `/api/trading/total?stock_id=<stock_id>`
+
+* **Method:**
+
+  `GET`
+  
+*  **Required Params**
+ 
+   `stock_id=[string]`<br />
+
+*  **Header**
+ 
+   `Authorization: Token`
+
+* **Success Response:**
+
+  * **Code:** 200 OK<br />
+```
+{
+    "stock": "Ayala Corporation",
+    "total": 293400.0
+}
+```
+
+* **Sample Call:**
+
+```
+curl --location --request GET 'http://localhost:8000/api/trading/total?stock_id=AC' \
+--header 'Authorization: Token 27463b7ca44e32913c476eb5d0ed2cc4cf078da1'
+```
+
