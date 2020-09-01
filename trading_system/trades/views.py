@@ -99,7 +99,7 @@ class TradeSellView(generics.ListCreateAPIView):
 
 class UserView(generics.CreateAPIView):
     permission_classes = [AllowAny]
-
+    serializer_class = UserSerializer
     def post(self, request, format=None):
         serializer = UserSerializer(
             data=request.data,
