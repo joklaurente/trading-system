@@ -2,6 +2,7 @@ from rest_framework import serializers
 from trades.models import Trade, Stock
 from django.contrib.auth.models import User
 
+
 class TradeBuySerializer(serializers.ModelSerializer):
     stock_id = serializers.CharField(max_length=200)
     quantity = serializers.IntegerField(default=1)
@@ -81,3 +82,9 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+
+class StockSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stock
+        fields = ('oid', 'name', 'price')

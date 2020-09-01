@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from django.db.models import Sum
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
-from trades.serializers import TradeBuySerializer, TradeSellSerializer, UserSerializer
+from trades.serializers import TradeBuySerializer, TradeSellSerializer, UserSerializer, StockSerializer
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 
@@ -18,7 +18,6 @@ class TradeListView(generics.ListCreateAPIView):
     def get(self, request, *args, **kwargs):
         stocks = Trade.objects.filter(
             user=request.user).values("stock__name", "quantity")
-        print(stocks)
         return Response(
             stocks,
             status=status.HTTP_200_OK,
@@ -118,3 +117,29 @@ class UserView(generics.CreateAPIView):
             data['token'] = token
             return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class StockListView(generics.ListCreateAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        stocks = Stock.objects.all().values("oid", "name", "price")
+        return Response(
+            stocks,
+            status=status.HTTP_200_OK,
+        )
+
+
+class StockCreateView(generics.ListCreateAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = Stock.objects.all()
+    serializer_class = StockSerializer
+
+
+class StockUpdateView(generics.RetrieveUpdateDestroyAPIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    queryset = Stock.objects.all()
+    serializer_class = StockSerializer
