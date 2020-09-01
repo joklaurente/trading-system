@@ -220,7 +220,7 @@ curl --location --request GET 'http://localhost:8000/api/stock/list' \
 
 ```
 curl --location --request POST 'http://localhost:8000/api/stock/create' \
---header 'Authorization: Token 7b5187a2b32631aff0d61b29df4530cc08c741c7' \
+--header 'Authorization: Token 96033009074f716d51ad27480f1c89a4efa612c4' \
 --form 'oid=GLO' \
 --form 'name=Globe Telecom, Inc.' \
 --form 'price=500'
@@ -264,7 +264,7 @@ curl --location --request POST 'http://localhost:8000/api/stock/create' \
 
 ```
 curl --location --request PUT 'http://localhost:8000/api/stock/1/' \
---header 'Authorization: Token 47d06b1337e333df00060c50764231b53b15976a' \
+--header 'Authorization: Token 96033009074f716d51ad27480f1c89a4efa612c4' \
 --form 'oid=GLO' \
 --form 'name=Globe Telecom, Inc.' \
 --form 'price=1500'
@@ -307,7 +307,7 @@ curl --location --request PUT 'http://localhost:8000/api/stock/1/' \
 
 ```
 curl --location --request POST 'http://localhost:8000/api/trading/buy' \
---header 'Authorization: Token 27463b7ca44e32913c476eb5d0ed2cc4cf078da1' \
+--header 'Authorization: Token 96033009074f716d51ad27480f1c89a4efa612c4' \
 --form 'stock_id=AC' \
 --form 'quantity=450'
 ```
@@ -348,7 +348,7 @@ curl --location --request POST 'http://localhost:8000/api/trading/buy' \
 
 ```
 curl --location --request POST 'http://localhost:8000/api/trading/sell' \
---header 'Authorization: Token 27463b7ca44e32913c476eb5d0ed2cc4cf078da1' \
+--header 'Authorization: Token 96033009074f716d51ad27480f1c89a4efa612c4' \
 --form 'stock_id=AC' \
 --form 'quantity=50'
 ```
@@ -395,7 +395,7 @@ curl --location --request POST 'http://localhost:8000/api/trading/sell' \
 
 ```
 curl --location --request GET 'http://localhost:8000/api/trading/list' \
---header 'Authorization: Token 27463b7ca44e32913c476eb5d0ed2cc4cf078da1'
+--header 'Authorization: Token 96033009074f716d51ad27480f1c89a4efa612c4'
 ```
 
 ### Show Total Value Invested
@@ -432,6 +432,6 @@ curl --location --request GET 'http://localhost:8000/api/trading/list' \
 
 ```
 curl --location --request GET 'http://localhost:8000/api/trading/total?stock_id=AC' \
---header 'Authorization: Token 27463b7ca44e32913c476eb5d0ed2cc4cf078da1'
+--header 'Authorization: Token 96033009074f716d51ad27480f1c89a4efa612c4'
 ```
 
