@@ -16,9 +16,9 @@ class Stock(models.Model):
 
 class Trade(models.Model):
     user = models.ForeignKey(
-        User, null=True, on_delete=models.SET_NULL, related_name='+')
+        User, null=True, on_delete=models.CASCADE)
     stock = models.ForeignKey(
-        Stock, null=True, on_delete=models.SET_NULL, related_name='+')
+        Stock, null=True, on_delete=models.CASCADE)
     quantity = models.IntegerField("Stock quantity", default=1)
 
     def __str__(self):

@@ -1,12 +1,14 @@
 from trades.models import Trade, Stock
 from rest_framework import generics
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from django.db.models import Sum
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status
-from trades.serializers import TradeBuySerializer, TradeSellSerializer
+from trades.serializers import TradeBuySerializer, TradeSellSerializer, UserSerializer
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 
 
 class TradeListView(generics.ListCreateAPIView):
@@ -65,7 +67,6 @@ class TradeBuyView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request, format=None):
-        # serializer = TradeBuySerializer(data=request.data)
         serializer = TradeBuySerializer(
             data=request.data,
             context={
@@ -94,4 +95,26 @@ class TradeSellView(generics.ListCreateAPIView):
             serializer.save()
             message = 'Stock has been sold'
             return Response(message, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserView(generics.CreateAPIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request, format=None):
+        serializer = UserSerializer(
+            data=request.data,
+            context={
+                'request': request
+            },
+        )
+
+        data = {}
+        if serializer.is_valid():
+            account = serializer.save()
+            data['response'] = "Successfully registered a new user."
+            data['username'] = account.username
+            token = Token.objects.get(user=account).key
+            data['token'] = token
+            return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
