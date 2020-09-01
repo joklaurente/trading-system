@@ -77,21 +77,28 @@ python manage.py runserver
 * **Success Response:**
 
   * **Code:** 201 CREATED<br />
-    **Content:** `{
+```
+{
     "response": "Successfully registered a new user.",
     "username": "user",
     "token": "96033009074f716d51ad27480f1c89a4efa612c4"
-}`
- 
+}
+```
 * **Error Response:**
 
   * **Code:** 400 BAD REQUEST<br />
-    **Content:** `{"username":["A user with that username already exists."]}`
+```
+{
+    "username": [
+        "A user with that username already exists."
+    ]
+}
+```
 
 * **Sample Call:**
 
-  ```
-  curl --location --request POST 'http://localhost:8000/api/user/register' \
-  --form 'username=user' \
-  --form 'password=password'
-  ```
+```
+curl --location --request POST 'http://localhost:8000/api/user/register' \
+--form 'username=user' \
+--form 'password=password'
+```
