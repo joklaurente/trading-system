@@ -56,6 +56,7 @@ python manage.py loaddata fixtures/stocks.json
 python manage.py runserver
 ```
 ## API Endpoints
+
 ### Create User and Token
 ----
   Creates a new user and token.
@@ -180,3 +181,48 @@ curl --location --request POST 'http://localhost:8000/api/user/register' \
 curl --location --request GET 'http://localhost:8000/api/stock/list' \
 --header 'Authorization: Token 96033009074f716d51ad27480f1c89a4efa612c4'
 ```
+
+
+### Create Stock
+----
+  Create a new stock.
+
+* **URL**
+
+  /api/stock/create
+
+* **Method:**
+
+  `POST`
+  
+*  **Required Params**
+ 
+   `oid=[string]`<br />
+   `name=[string]`<br />
+   `price=[float]`
+
+*  **Header**
+ 
+   `Authorization: Token`
+
+* **Success Response:**
+
+  * **Code:** 201 CREATED<br />
+```
+{
+    "oid": "GLOBE",
+    "name": "Globe Telecom, Inc.",
+    "price": "500.00"
+}
+```
+
+* **Sample Call:**
+
+```
+curl --location --request POST 'http://localhost:8000/api/stock/create' \
+--header 'Authorization: Token 7b5187a2b32631aff0d61b29df4530cc08c741c7' \
+--form 'oid=GLOBE' \
+--form 'name=Globe Telecom, Inc.' \
+--form 'price=500'
+```
+
